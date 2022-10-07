@@ -1,0 +1,3 @@
+[submodule "pyproject_common"]
+	path = pyproject_common
+	url = https://github.com/seamonstr/pyproject_common
