@@ -1,12 +1,10 @@
 import unittest
-import itertools
 from .match import (
     Card,
     Deck,
-    Matcher,
-    ExactMatcher,
-    SuiteMatcher,
-    ValueMatcher,
+    matchExact,
+    matchSuite,
+    matchValue,
     Suite,
     Value,
     CARDS_IN_PACK,
@@ -36,24 +34,24 @@ class CardTest(unittest.TestCase):
 class MatcherTest(unittest.TestCase):
     def testExactMatcher(self):
         self.matcherTest(
-            ExactMatcher(),
+            matchExact,
             (True, False, False),
             (exact_match, value_match, suite_match),
         )
 
     def testValueMatcher(self):
         self.matcherTest(
-            ValueMatcher(), (True, True, False), (value_match, exact_match, suite_match)
+            matchValue, (True, True, False), (value_match, exact_match, suite_match)
         )
 
     def testSuiteMatcher(self):
         self.matcherTest(
-            SuiteMatcher(), (True, True, False), (suite_match, exact_match, value_match)
+            matchSuite, (True, True, False), (suite_match, exact_match, value_match)
         )
 
     def matcherTest(self, matcher, expected, tests):
         for (i, test) in zip(expected, tests):
-            self.assertEqual(i, matcher.match(*test))
+            self.assertEqual(i, matcher(*test))
 
 
 class DeckTest(unittest.TestCase):
@@ -70,18 +68,23 @@ class DeckTest(unittest.TestCase):
         deck.shuffle()
         self.assertEqual(len(deck.cards), CARDS_IN_PACK)
         # Shallow check to ensure the deck is not in its default state
-        self.assertNotEqual(deck.cards[0].value, Value.ONE)
-        pass
+        seemsRandom = False
+        for i, card in enumerate(deck.cards):
+            seemsRandom = card.value != i
+            if seemsRandom or i == 10:
+                break
+        self.assertTrue(seemsRandom)
 
 
 class CardPlayTest(unittest.TestCase):
     def testCardPlay(self):
         deck = Deck(1)
-        # Pretty much checking it doesn't crash; Given it's written to return a random winner,
-        # it's kinda hard to check it's working correctly!
-        # Could have written a WinnerChooser thing and provide a test implementation to give a predictable
-        # winner and score, but that felt like over-investing at this point :)
-        play_cards(deck, ExactMatcher())
+        # Pretty much checking it doesn't crash; Given it's written to return a random
+        # winner, it's kinda hard to check it's working correctly!
+        # Could have written a WinnerChooser thing and provide a test implementation
+        # to give a predictable winner and score, but that felt like over-investing at
+        # this point :)
+        play_cards(deck, matchExact)
 
 
 if __name__ == "__main__":
