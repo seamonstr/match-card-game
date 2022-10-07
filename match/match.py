@@ -1,4 +1,3 @@
-import sys
 from enum import Enum, auto
 import random
 from collections.abc import Callable
@@ -46,13 +45,13 @@ class Deck:
     Represents a deck of cards comprising num_packs_ packs.
     """
 
-    def __init__(self, num_packs_: int):
+    def __init__(self, num_packs: int):
         """
         Cards will be initially sorted by suite and value.
         """
-        self.cards = num_packs_ * CARDS_IN_PACK * [None]
+        self.cards: list[Card] = []
         inx = 0
-        for i in range(num_packs_):
+        for i in range(num_packs):
             for suite in Suite:
                 for card_val in Value:
                     inx += 1
@@ -104,13 +103,13 @@ def matcher_for_string(match_name: str) -> MatcherType:
             MatchFunction.VALUE: matchValue,
             MatchFunction.EXACT: matchExact,
         }[MatchFunction[match_name.upper()]]
-    except (KeyError) as e:
+    except (KeyError):
         raise ValueError("No such match-type")
 
 
 #########################################
 # Play a game of cards with the specified deck and matching strategy.
-def play_cards(deck_: Deck, matcher_: MatcherType) -> tuple[int, int]:
+def play_cards(deck_: Deck, matcher_: MatcherType) -> list[int]:
     player_scores = [0, 0]
     curr_card = None
     cards_in_play = 0

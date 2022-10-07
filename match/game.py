@@ -1,17 +1,15 @@
 from argparse import ArgumentParser
+from typing import Optional
 from match.match import (
     matcher_for_string,
     MatchFunction,
     Deck,
     play_cards,
-    Card,
     MatcherType,
 )
-from collections.abc import Callable
-import sys
 
 
-def get_user_setup(argv_: list[str]) -> tuple[int, MatcherType]:
+def get_user_setup(argv_: Optional[list[str]]) -> tuple[int, MatcherType]:
     parser = ArgumentParser("Play a snap-like game of cards")
     parser.add_argument("packs", type=int, help="Number of packs to play with")
     parser.add_argument(
