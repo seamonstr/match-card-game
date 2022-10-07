@@ -1,5 +1,5 @@
 import unittest
-from .match import (
+from match.match import (
     Card,
     Deck,
     matchExact,
