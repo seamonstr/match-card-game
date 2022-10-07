@@ -31,11 +31,11 @@ It should then simulate the game.
 The program should output the results by either declaring the winner, or a draw.
 
 ## Glossary
-*Pack* - A complete set of 52 playing cards.
-*Deck* - The set of cards in play. This could be multiple packs, or a subset of cards from a single pack depending on the game being played.
-*Value* - The number or title value associated with a card. EG "one", "queen" or "ace".
-*Suit* - A pack is divided into 4 suits. The possible suits are
-* "clubs" ♣️,
-* "diamonds" ♦️
-* "hearts" ❤️
-* "spades" ♠️
+- *Pack* - A complete set of 52 playing cards.
+- *Deck* - The set of cards in play. This could be multiple packs, or a subset of cards from a single pack depending on the game being played.
+- *Value* - The number or title value associated with a card. EG "one", "queen" or "ace".
+- *Suit* - A pack is divided into 4 suits. The possible suits are
+  * "clubs" ♣️,
+  * "diamonds" ♦️
+  * "hearts" ❤️
+  * "spades" ♠️
