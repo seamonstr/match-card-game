@@ -50,17 +50,10 @@ class Deck:
         Cards will be initially sorted by suite and value.
         """
         self.cards: list[Card] = []
-        inx = 0
         for i in range(num_packs):
             for suite in Suite:
                 for card_val in Value:
-                    inx += 1
-                    self.cards[
-                        i * CARDS_IN_PACK
-                        + ((card_val.value - 1) * len(Suite))
-                        + suite.value
-                        - 1
-                    ] = Card(suite, card_val)
+                    self.cards.append(Card(suite, card_val))
 
     def shuffle(self):
         random.shuffle(self.cards)

@@ -1,3 +1,7 @@
+import sys
+
+print(sys.path)
+
 import unittest
 from match.match import (
     Card,
